@@ -1,0 +1,22 @@
+{
+  "name": "SpaceList - WatchList for YouTube",
+  "description": "Simple WatchList extension for YouTube",
+  "version": "1.01",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open SpaceList"
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "permissions": [ 
+    "tabs",
+    "notifications"
+ ],
+  "icons": {
+    "16": "logo512.png",
+    "48": "logo512.png",
+    "128": "logo512.png"
+  }
+}
