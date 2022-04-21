@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { HookFormInput } from "../../components/HookFormInput";
 import { HiOutlineLockClosed, HiOutlineMail } from 'react-icons/hi';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface FormData {
   email: string;
@@ -28,8 +30,16 @@ export function Login() {
     resolver: yupResolver(schema)
   });
 
+  const { login } = useAuth();
+
   async function handleLogin(form: FormData) {
-    console.log(form)
+    await login(form);
+  }
+
+  const navigate = useNavigate();
+
+  function handleSignUp() {
+    navigate("/signup")
   }
 
   return (
@@ -59,16 +69,14 @@ export function Login() {
         <Button type="submit">
           Login
         </Button>
-
-        <OrContainer>
-          <div>
-            <p>Or</p>
-          </div>
-        </OrContainer>
-        <Button outlined>
-          Sign Up
-        </Button>
       </FormContainer>
+
+      <OrContainer>
+        <div>
+          <p>Or</p>
+        </div>
+      </OrContainer>
+      <Button outlined onClick={handleSignUp}>Sign Up</Button>
     </Container>
   )
 }

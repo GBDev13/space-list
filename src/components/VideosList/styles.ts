@@ -7,6 +7,18 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      font-size: 0.65rem;
+      color: ${({ theme }) => theme.purple};
+    }
+  }
 `;
 
 export const ListContainer = styled.section`

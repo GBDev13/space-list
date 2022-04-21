@@ -3,38 +3,68 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { FaTrashAlt } from 'react-icons/fa';
 import { RiAddCircleLine } from 'react-icons/ri';
+import { useList } from "../../contexts/ListContext";
+
+export interface IVideo {
+  docId?: string;
+  id: string;
+  title: string;
+  thumbnail: string;
+  duration: string;
+  durationMs: number;
+}
 
 interface VideoProps {
   addMode?: boolean;
+  data: IVideo;
 }
 
-export function VideoItem({ addMode = false }: VideoProps) {
+export function VideoItem({ data, addMode = false }: VideoProps) {
+  const { createListItem, deleteListItem, list } = useList();
+  
+  async function addCurrentVideo() {
+    await createListItem(data)
+  }
+
+  async function handleDelete() {
+    if(!data?.docId) return;
+    await deleteListItem(data.docId)
+  }
+
+  function openVideo() {
+    chrome.tabs.create({
+      url: `https://www.youtube.com/watch?v=${data.id}`
+    })
+  }
+
+  const alreadyExists = list.some(video => video.id === data.id);
+
   return (
     <Container>
-      <Thumb imgUrl="https://veja.abril.com.br/wp-content/uploads/2019/12/amazonia-floresta-coraccca7ao.jpg.jpg"/>
+      <Thumb imgUrl={data.thumbnail}/>
       <Details>
-        <strong title="Meu titulo Meu titulo Meu titulo Meu titulo">Meu titulo Meu titulo Meu titulo Meu titulo</strong>
+        <strong title={data.title}>{data.title}</strong>
         <div>
           <div>
             {addMode ? (
-              <Button>
+              <Button onClick={addCurrentVideo} disabled={alreadyExists}>
                 <RiAddCircleLine />
                 Add to list
               </Button>
             ) : (
               <>
-                <Button>
+                <Button onClick={openVideo}>
                   <BsFillPlayFill />
                   Play now
                 </Button>
-                <FaTrashAlt size={12} />
+                <FaTrashAlt size={12} onClick={handleDelete} />
               </>
             )}
             
           </div>
           <span>
             <AiOutlineClockCircle />
-            15:35
+            {data.duration}
           </span>
         </div>
       </Details>

@@ -57,6 +57,12 @@ export const GlobalStyles = createGlobalStyle`
   ul{
     list-style:none;
   }
+
+  .toastContainer {
+    position: absolute !important;
+    padding: 0.2rem;
+    font-size: 0.7rem;
+  }
 `;
 
 export const PagesWrapper = styled.div`
