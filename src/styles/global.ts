@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -56,5 +56,17 @@ export const GlobalStyles = createGlobalStyle`
   
   ul{
     list-style:none;
+  }
+`;
+
+export const PagesWrapper = styled.div`
+  width: 20rem;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  > main {
+    width: 100%;
+    height: 100%;
   }
 `;

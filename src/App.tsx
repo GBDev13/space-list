@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components'
 import { theme } from './styles'
-import { GlobalStyles } from './styles/global'
+import { GlobalStyles, PagesWrapper } from './styles/global'
 import { MemoryRouter as Router } from "react-router-dom";
 import { RoutesComponent } from './routes';
 
@@ -9,8 +9,10 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-            <RoutesComponent />
-        </ThemeProvider>
+        <PagesWrapper>
+          <RoutesComponent />
+        </PagesWrapper>
+      </ThemeProvider>
     </Router>
   )
 }
